@@ -2,10 +2,10 @@
   channel = "stable-24.05";
   packages = [
     pkgs.nodejs_20
-    pkgs.git 
+    pkgs.git
   ];
   idx = {
-    extensions = [ 
+    extensions = [
       "google.gemini-cli-vscode-ide-companion",
       "dbaeumer.vscode-eslint"
     ];
@@ -13,15 +13,12 @@
       onCreate = {
         npm-install = "npm install";
       };
-      onStart = {
-        dev = "npm run dev";
-      };
     };
     previews = {
       enable = true;
       previews = {
         web = {
-          command = ["npm", "run", "dev"];
+          command = ["npm", "run", "dev", "--", "--port", "$PORT"];
           manager = "web";
         };
       };

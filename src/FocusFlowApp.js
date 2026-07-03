@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 export default function FocusFlowApp() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
+  const [priority, setPriority] = useState('Medium'); // Default priority
   const [timer, setTimer] = useState(25 * 60); // 25 minutes in seconds
   const [isActive, setIsActive] = useState(false);
 
@@ -25,7 +26,7 @@ export default function FocusFlowApp() {
   const handleAddTask = (e) => {
     e.preventDefault();
     if (newTask.trim()) {
-      setTasks([...tasks, { text: newTask, completed: false }]);
+      setTasks([...tasks, { text: newTask, completed: false, priority: priority }]);
       setNewTask('');
     }
   };
@@ -35,6 +36,18 @@ export default function FocusFlowApp() {
     const seconds = time % 60;
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
+  
+  const priorityColors = {
+    High: 'bg-red-500',
+    Medium: 'bg-yellow-500',
+    Low: 'bg-green-500',
+  };
+
+  const sortedTasks = [...tasks].sort((a, b) => {
+    const priorityOrder = { High: 3, Medium: 2, Low: 1 };
+    return priorityOrder[b.priority] - priorityOrder[a.priority];
+  });
+
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center">
@@ -65,15 +78,24 @@ export default function FocusFlowApp() {
               className="flex-grow p-2 rounded-l-lg bg-gray-700 text-white focus:outline-none"
               placeholder="Add a new task..."
             />
+            <select 
+                value={priority} 
+                onChange={(e) => setPriority(e.target.value)}
+                className="bg-gray-700 text-white p-2 focus:outline-none"
+            >
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+            </select>
             <button type="submit" className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-r-lg">
               Add
             </button>
           </form>
           <ul>
-            {tasks.map((task, index) => (
+            {sortedTasks.map((task, index) => (
               <li key={index} className="flex items-center justify-between bg-gray-700 p-2 rounded-lg mb-2">
                 <span>{task.text}</span>
-                {/* Add functionality for completing/deleting tasks if needed */}
+                <span className={`px-2 py-1 text-xs font-bold rounded-full ${priorityColors[task.priority]}`}>{task.priority}</span>
               </li>
             ))}
           </ul>

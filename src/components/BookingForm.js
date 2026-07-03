@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BookingForm = ({ formData, onFormChange, onSubmit, availablePlans, error, selectedTimeSlot, availableTimeSlots }) => {
+const BookingForm = ({ formData, onFormChange, onSubmit, error, selectedTimeSlot, availableTimeSlots }) => {
     const availablePlans = [
         { id: 1, name: 'Basic Consultation', duration: '30 min' },
         { id: 2, name: 'Deep Dive Session', duration: '1 hour' },

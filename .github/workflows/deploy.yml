@@ -15,8 +15,12 @@ jobs:
           node-version: '20'
       - name: Install Dependencies
         run: npm install
+      - name: Build
+        run: npm run build
       - name: Deploy to Firebase
-        uses: actions/deploy@v1
+        uses: w9jds/firebase-action@master
         with:
-          path: public
-          appType: server
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: focusflow-app-571d5

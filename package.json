@@ -6,14 +6,18 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack",
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
     "dev-server": "nodemon server.js",
     "dev-client": "webpack --watch",
     "test": "jest"
   },
+  "proxy": "http://localhost:3001",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "concurrently": "^9.2.3",
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
     "react": "^18.2.0",
+    "react-calendar": "^6.0.1",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

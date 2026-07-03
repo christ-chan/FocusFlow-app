@@ -4,17 +4,23 @@
     pkgs.nodejs_20
   ];
   idx = {
-    extensions = [ "google.gemini-cli-vscode-ide-companion" ];
+    extensions = [ 
+      "google.gemini-cli-vscode-ide-companion",
+      "dbaeumer.vscode-eslint"
+    ];
     workspace = {
       onCreate = {
         npm-install = "npm install";
+      };
+      onStart = {
+        dev = "npm run dev";
       };
     };
     previews = {
       enable = true;
       previews = {
         web = {
-          command = ["npx", "serve", "public", "-l", "$PORT"];
+          command = ["npm", "run", "dev"];
           manager = "web";
         };
       };

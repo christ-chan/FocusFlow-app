@@ -6,7 +6,7 @@
   ];
   idx = {
     extensions = [
-      "google.gemini-cli-vscode-ide-companion",
+      "google.gemini-cli-vscode-ide-companion"
       "dbaeumer.vscode-eslint"
     ];
     workspace = {
@@ -18,7 +18,7 @@
       enable = true;
       previews = {
         web = {
-          command = ["npm", "run", "dev-server"];
+          command = ["npm" "run" "dev-server"];
           manager = "web";
         };
       };

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import FocusFlowApp from './FocusFlowApp';
+import SchedulingApp from './SchedulingApp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<FocusFlowApp />);
+root.render(<SchedulingApp />);

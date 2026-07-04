@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../Calendar.css';
 
-const CalendarView = ({ selectedDate, onDateChange, bookings, allTimeSlots }) => {
+const CalendarView = ({ selectedDate, onDateChange, bookings, allTimeSlots, isAdmin }) => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const tileDisabled = ({ date, view }) => {
@@ -26,6 +26,25 @@ const CalendarView = ({ selectedDate, onDateChange, bookings, allTimeSlots }) =>
         return null;
     };
 
+    const tileContent = ({ date, view }) => {
+        if (view === 'month' && isAdmin) {
+            const dateString = formatDate(date);
+            const bookingsForDate = bookings.filter(b => b.date === dateString);
+            if (bookingsForDate.length > 0) {
+                return (
+                    <ul className="text-xs text-left mt-1 list-disc list-inside">
+                        {bookingsForDate.slice(0, 2).map(booking => (
+                            <li key={booking.id} className="truncate">{booking.title}</li>
+                        ))}
+                        {bookingsForDate.length > 2 && <li className="text-xs">...</li>}
+                    </ul>
+                );
+            }
+        }
+        return null;
+    };
+
+
     return (
         <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Select a Date</h2>
@@ -34,6 +53,7 @@ const CalendarView = ({ selectedDate, onDateChange, bookings, allTimeSlots }) =>
                 value={selectedDate}
                 tileDisabled={tileDisabled}
                 tileClassName={tileClassName}
+                tileContent={tileContent}
             />
         </div>
     );

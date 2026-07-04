@@ -151,7 +151,7 @@ export default function SchedulingApp() {
         <div className="min-h-screen bg-gray-100">
             {renderHeader()}
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-4 sm:p-6 md:p-8">
-                <CalendarView selectedDate={selectedDate} onDateChange={()=>{}} bookings={bookings} allTimeSlots={allTimeSlots} />
+                <CalendarView selectedDate={selectedDate} onDateChange={()=>{}} bookings={bookings} allTimeSlots={allTimeSlots} isAdmin={isAdmin} />
                 <div className="bg-white p-6 rounded-lg shadow-lg">
                     <h2 className="text-2xl font-bold mb-4">Book Your Appointment</h2>
                     {confirmation ? (

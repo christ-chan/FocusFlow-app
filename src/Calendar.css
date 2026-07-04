@@ -17,3 +17,9 @@
     color: #ccc;
     text-decoration: none;
 }
+
+/* Red glowing effect for input errors */
+.input-error {
+  border-color: #ef4444; /* red-500 */
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
+}
